@@ -1,8 +1,8 @@
 export = RegisterScopeThirteen;
 
 class TokenAndSign {
-    token: String;
-    sign: String;
+    token: string;
+    sign: string;
     expiration: Date;
 }
 
@@ -29,30 +29,30 @@ declare class RegisterScopeThirteen extends AfipWebService {
      **/
     getTaxpayerDetails(
         token: TokenAndSign,
-        identifier: Number
+        identifier: number
     ): Promise<{
         estadoClave: "ACTIVO" | "INACTIVO";
         tipoClave: "CUIT" | "CUIL" | "CDI";
         tipoPersona: "FISICA" | "JURIDICA";
         tipoDocumento: "LC" | "LE" | "CI" | "TRAM" | "ACTA" | "PAS" | "DNI" | "INDET" | "CERT" | "DIEXT" | "DNI M" | "INDOC";
-        idPersona: Number;
-        razonSocial: String;
-        nombre: String;
-        apellido: String;
-        fechaNacimiento: String;
-        descripcionActividadPrincipal: String;
-        periodoActividadPrincipal: String;
-        mesCierre: Number;
+        idPersona: number;
+        razonSocial: string;
+        nombre: string;
+        apellido: string;
+        fechaNacimiento: string;
+        descripcionActividadPrincipal: string;
+        periodoActividadPrincipal: string;
+        mesCierre: number;
         domicilio: {
             tipoDomicilio: "FISCAL" | "LEGAL/REAL";
-            estadoDomicilio: String;
-            codPostal: String;
-            idProvincia: Number;
-            descripcionProvincia: String;
-            calle: String;
-            numero: String;
-            direccion: String;
-            localidad: String;
+            estadoDomicilio: string;
+            codPostal: string;
+            idProvincia: number;
+            descripcionProvincia: string;
+            calle: string;
+            numero: string;
+            direccion: string;
+            localidad: string;
         }[];
     }>;
     /**
@@ -63,6 +63,6 @@ declare class RegisterScopeThirteen extends AfipWebService {
      * @return object|null if taxpayer does not exists, return null,
      * if it exists, returns idPersona property of response
      **/
-    getTaxIDByDocument(documentNumber: any): Promise<Number[]>;
+    getTaxIDByDocument(documentnumber: any): Promise<number[]>;
 }
 import AfipWebService = require("./AfipWebService");

@@ -1,8 +1,8 @@
 export = RegisterInscriptionProof;
 
 class TokenAndSign {
-    token: String;
-    sign: String;
+    token: string;
+    sign: string;
     expiration: Date;
 }
 
@@ -29,58 +29,58 @@ declare class RegisterInscriptionProof extends AfipWebService {
      **/
     getTaxpayerDetails(
         token: TokenAndSign,
-        identifier: Number
+        identifier: number
     ): Promise<{
         datosGenerales: {
             estadoClave: "ACTIVO" | "INACTIVO";
             tipoClave: "CUIT" | "CUIL" | "CDI";
             tipoPersona: "FISICA" | "JURIDICA";
-            idPersona: Number;
-            razonSocial: String;
-            nombre: String;
-            apellido: String;
+            idPersona: number;
+            razonSocial: string;
+            nombre: string;
+            apellido: string;
             domicilioFiscal: {
                 tipoDomicilio: "FISCAL" | "LEGAL/REAL";
-                codPostal: String;
-                idProvincia: Number;
-                descripcionProvincia: String;
-                direccion: String;
-                localidad: String;
+                codPostal: string;
+                idProvincia: number;
+                descripcionProvincia: string;
+                direccion: string;
+                localidad: string;
             };
-            mesCierre: Number;
+            mesCierre: number;
         };
         datosMonotributo: {
             actividadMonotributista: {
-                idActividad: Number;
-                descripcionActividad: String;
-                nomenclador: Number;
-                orden: Number;
-                periodo: String;
+                idActividad: number;
+                descripcionActividad: string;
+                nomenclador: number;
+                orden: number;
+                periodo: string;
             };
             categoriaMonotributo: {
-                idCategoria: Number;
-                descripcionCategoria: String;
-                idImpuesto: Number;
-                periodo: String;
+                idCategoria: number;
+                descripcionCategoria: string;
+                idImpuesto: number;
+                periodo: string;
             };
             impuesto: {
-                idImpuesto: Number;
-                descripcionImpuesto: String;
-                periodo: String;
+                idImpuesto: number;
+                descripcionImpuesto: string;
+                periodo: string;
             };
         };
         datosRegimenGeneral: {
             actividad: {
-                idActividad: Number;
-                descripcionActividad: String;
-                nomenclador: Number;
-                orden: Number;
-                periodo: String;
+                idActividad: number;
+                descripcionActividad: string;
+                nomenclador: number;
+                orden: number;
+                periodo: string;
             }[];
             impuesto: {
-                idImpuesto: Number;
-                descripcionImpuesto: String;
-                periodo: String;
+                idImpuesto: number;
+                descripcionImpuesto: string;
+                periodo: string;
             }[];
         };
     }>;
