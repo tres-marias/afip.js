@@ -71,7 +71,7 @@ declare class RegisterInscriptionProof extends AfipWebService {
                 idImpuesto: Number;
                 descripcionImpuesto: String;
                 periodo: String;
-            };
+            }[];
         };
     }>;
     /**
