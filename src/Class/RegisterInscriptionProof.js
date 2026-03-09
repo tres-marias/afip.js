@@ -38,9 +38,9 @@ module.exports = class RegisterInscriptionProof extends AfipWebService {
      * if it exists, returns full response {@see
      * WS Specification item 3.2.2}
      **/
-    async getTaxpayerDetails(identifier, tokenAndSign) {
+    async getTaxpayerDetails(tokenAndSign, identifier) {
         // Get token and sign
-        let { token, sign } = tokenAndSign ? tokenAndSign : await this.afip.GetServiceTA("ws_sr_constancia_inscripcion");
+        let { token, sign } = tokenAndSign; // ? tokenAndSign : await this.afip.GetServiceTA("ws_sr_constancia_inscripcion");
 
         // Prepare SOAP params
         let params = {

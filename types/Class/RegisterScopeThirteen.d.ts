@@ -1,4 +1,11 @@
 export = RegisterScopeThirteen;
+
+class TokenAndSign {
+    token: String;
+    sign: String;
+    expiration: Date;
+}
+
 declare class RegisterScopeThirteen extends AfipWebService {
     constructor(afip: any);
     /**
@@ -20,7 +27,10 @@ declare class RegisterScopeThirteen extends AfipWebService {
      * if it exists, returns idPersona property of response {@see
      * WS Specification item 3.2.2}
      **/
-    getTaxpayerDetails(identifier: Number): Promise<{
+    getTaxpayerDetails(
+        token: TokenAndSign,
+        identifier: Number
+    ): Promise<{
         estadoClave: "ACTIVO" | "INACTIVO";
         tipoClave: "CUIT" | "CUIL" | "CDI";
         tipoPersona: "FISICA" | "JURIDICA";

@@ -1,4 +1,11 @@
 export = RegisterInscriptionProof;
+
+class TokenAndSign {
+    token: String;
+    sign: String;
+    expiration: Date;
+}
+
 declare class RegisterInscriptionProof extends AfipWebService {
     constructor(afip: any);
     /**
@@ -20,7 +27,10 @@ declare class RegisterInscriptionProof extends AfipWebService {
      * if it exists, returns full response {@see
      * WS Specification item 3.2.2}
      **/
-    getTaxpayerDetails(identifier: Number): Promise<{
+    getTaxpayerDetails(
+        token: TokenAndSign,
+        identifier: Number
+    ): Promise<{
         datosGenerales: {
             estadoClave: "ACTIVO" | "INACTIVO";
             tipoClave: "CUIT" | "CUIL" | "CDI";
@@ -81,6 +91,6 @@ declare class RegisterInscriptionProof extends AfipWebService {
      *
      * @return [object] returns web service full response
      **/
-    getTaxpayersDetails(identifiers: any): Promise<any>;
+    private getTaxpayersDetails(identifiers: any): Promise<any>;
 }
 import AfipWebService = require("./AfipWebService");
