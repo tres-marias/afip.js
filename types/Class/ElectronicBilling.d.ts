@@ -1,69 +1,64 @@
 export = ElectronicBilling;
 
 class TokenAndSign {
-    token: String;
-    sign: String;
+    token: string;
+    sign: string;
     expiration: Date;
 }
 
-class Voucher {
-    "CantReg": Number;
-    "PtoVta": Number;
-    "CbteTipo": Number;
+export class VoucherDto {
+    "CantReg": number;
+    "PtoVta": number;
+    "CbteTipo": number;
     "Concepto": 1 | 2 | 3;
-    "DocTipo": Number;
-    "DocNro": Number;
-    "CbteDesde": Number;
-    "CbteHasta": Number;
-    "CbteFch": Number;
-    "ImpTotal": Number;
-    "ImpTotConc": Number;
-    "ImpNeto": Number;
-    "ImpOpEx": Number;
-    "ImpIVA": Number;
-    "ImpTrib": Number;
-    "FchServDesde": Number;
-    "FchServHasta": Number;
-    "FchVtoPago": Number;
-    "MonId": String;
-    "MonCotiz": Number;
-    "CbtesAsoc": [
-        {
-            Tipo: Number;
-            PtoVta: Number;
-            Nro: Number;
-            Cuit: Number;
-        }
-    ];
-    "Tributos": [
-        {
-            Id: Number;
-            Desc: String;
-            BaseImp: Number;
-            Alic: Number;
-            Importe: Number;
-        }
-    ];
-    "Iva": [
-        {
-            Id: Number;
-            BaseImp: Number;
-            Importe: Number;
-        }
-    ];
-    "Opcionales": [
-        {
-            Id: Number;
-            Valor: Number;
-        }
-    ];
-    "Compradores": [
-        {
-            DocTipo: Number;
-            DocNro: Number;
-            Porcentaje: Number;
-        }
-    ];
+    "DocTipo": number;
+    "DocNro": number;
+    "CbteDesde": number;
+    "CbteHasta": number;
+    "CbteFch": number;
+    "ImpTotal": number;
+    "ImpTotConc": number;
+    "ImpNeto": number;
+    "ImpOpEx": number;
+    "ImpIVA": number;
+    "ImpTrib": number;
+    "FchServDesde": number;
+    "FchServHasta": number;
+    "FchVtoPago": number;
+    "MonId": string;
+    "MonCotiz": number;
+    "CbtesAsoc": {
+        Tipo: number;
+        PtoVta: number;
+        Nro: number;
+        Cuit: number;
+    }[];
+    "Tributos": {
+        Id: number;
+        Desc: string;
+        BaseImp: number;
+        Alic: number;
+        Importe: number;
+    }[];
+    "Iva": {
+        Id: number;
+        BaseImp: number;
+        Importe: number;
+    }[];
+    "Opcionales": {
+        Id: number;
+        Valor: number;
+    }[];
+    "Compradores": {
+        DocTipo: number;
+        DocNro: number;
+        Porcentaje: number;
+    }[];
+}
+
+export class Voucher extends VoucherDto {
+    CAE: string;
+    CAEFchVto: number;
 }
 
 declare class ElectronicBilling extends AfipWebService {
@@ -71,41 +66,40 @@ declare class ElectronicBilling extends AfipWebService {
     getServerStatus(tokenAndSign: TokenAndSign): Promise<string>;
     getSalesPoints(tokenAndSign: TokenAndSign): Promise<
         {
-            Nro: Number;
-            EmisionTipo: String;
-            Bloqueado: String;
-            FchBaja: Number;
+            Nro: number;
+            EmisionTipo: string;
+            Bloqueado: string;
+            FchBaja: number;
         }[]
     >;
     getLastVoucher(
-        salesPoint: Number,
-        type: Number,
+        salesPoint: number,
+        type: number,
         tokenAndSign: TokenAndSign
     ): Promise<{
-        PtoVta: Number;
-        CbteTipo: Number;
-        CbteNro: Number;
+        PtoVta: number;
+        CbteTipo: number;
+        CbteNro: number;
     }>;
     createVoucher(
-        voucher: Voucher,
+        voucher: VoucherDto,
         tokenAndSign: TokenAndSign
     ): Promise<{
-        CAE: String;
-        CAEFchVto: Number;
+        CAE: string;
+        CAEFchVto: number;
     }>;
-    getVoucherInfo(number: Number, salesPoint: Number, type: Number, tokenAndSign: TokenAndSign): Promise<Voucher>;
+    getVoucherInfo(number: number, salesPoint: number, type: number, tokenAndSign: TokenAndSign): Promise<Voucher>;
 
-    createNextVoucher(data: any): Promise<any>;
-    createCAEA(period: any, fortnight: any): Promise<any>;
-    getCAEA(period: any, fortnight: any): Promise<any>;
-    getVoucherTypes(): Promise<any>;
-    getConceptTypes(): Promise<any>;
-    getDocumentTypes(): Promise<any>;
-    getAliquotTypes(): Promise<any>;
-    getCurrenciesTypes(): Promise<any>;
-    getOptionsTypes(): Promise<any>;
-    getTaxTypes(): Promise<any>;
-
+    private createNextVoucher(data: any): Promise<any>;
+    private createCAEA(period: any, fortnight: any): Promise<any>;
+    private getCAEA(period: any, fortnight: any): Promise<any>;
+    private getVoucherTypes(): Promise<any>;
+    private getConceptTypes(): Promise<any>;
+    private getDocumentTypes(): Promise<any>;
+    private getAliquotTypes(): Promise<any>;
+    private getCurrenciesTypes(): Promise<any>;
+    private getOptionsTypes(): Promise<any>;
+    private getTaxTypes(): Promise<any>;
     /**
      * Change date from AFIP used format (yyyymmdd) to yyyy-mm-dd
      *
@@ -113,7 +107,7 @@ declare class ElectronicBilling extends AfipWebService {
      *
      * @return string date in format yyyy-mm-dd
      **/
-    formatDate(date: any): any;
+    private formatDate(date: any): any;
     /**
      * Make default request parameters for most of the operations
      *
