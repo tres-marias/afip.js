@@ -20,7 +20,60 @@ declare class RegisterInscriptionProof extends AfipWebService {
      * if it exists, returns full response {@see
      * WS Specification item 3.2.2}
      **/
-    getTaxpayerDetails(identifier: any): Promise<any>;
+    getTaxpayerDetails(identifier: Number): Promise<{
+        datosGenerales: {
+            estadoClave: "ACTIVO" | "INACTIVO";
+            tipoClave: "CUIT" | "CUIL" | "CDI";
+            tipoPersona: "FISICA" | "JURIDICA";
+            idPersona: Number;
+            razonSocial: String;
+            nombre: String;
+            apellido: String;
+            domicilioFiscal: {
+                tipoDomicilio: "FISCAL" | "LEGAL/REAL";
+                codPostal: String;
+                idProvincia: Number;
+                descripcionProvincia: String;
+                direccion: String;
+                localidad: String;
+            };
+            mesCierre: Number;
+        };
+        datosMonotributo: {
+            actividadMonotributista: {
+                idActividad: Number;
+                descripcionActividad: String;
+                nomenclador: Number;
+                orden: Number;
+                periodo: String;
+            };
+            categoriaMonotributo: {
+                idCategoria: Number;
+                descripcionCategoria: String;
+                idImpuesto: Number;
+                periodo: String;
+            };
+            impuesto: {
+                idImpuesto: Number;
+                descripcionImpuesto: String;
+                periodo: String;
+            };
+        };
+        datosRegimenGeneral: {
+            actividad: {
+                idActividad: Number;
+                descripcionActividad: String;
+                nomenclador: Number;
+                orden: Number;
+                periodo: String;
+            }[];
+            impuesto: {
+                idImpuesto: Number;
+                descripcionImpuesto: String;
+                periodo: String;
+            };
+        };
+    }>;
     /**
      * Asks to web service for taxpayers details
      *

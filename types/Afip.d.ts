@@ -29,7 +29,13 @@ declare class Afip {
      *
      * @param service Service for token authorization
      **/
-    CreateServiceTA(service: any): Promise<void>;
+    CreateServiceTA(service: any): Promise<{
+        header: { source: String; destination: String; uniqueId: Number; generationTime: Date; expirationTime: Date }[];
+        credentials: {
+            token: String;
+            sign: String;
+        };
+    }>;
     /**
      * Create generic Web Service
      *
