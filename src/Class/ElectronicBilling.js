@@ -58,9 +58,9 @@ module.exports = class ElectronicBilling extends AfipWebService {
      * 	for CAE (yyyy-mm-dd)] else returns complete response from
      * 	AFIP {@see WS Specification item 4.1.3}
      **/
-    async createVoucher(data, returnResponse = false, tokenAndSign) {
+    async createVoucher(data, token) {
         // Reassign data to avoid modify te original object
-        tokenAndSign = data.token;
+        // tokenAndSign = data.token;
         data = Object.assign({}, data);
 
         const req = {
@@ -90,15 +90,14 @@ module.exports = class ElectronicBilling extends AfipWebService {
 
         if (data["Opcionales"]) data["Opcionales"] = { Opcional: data["Opcionales"] };
 
-        const results = await this.executeRequest("FECAESolicitar", req, tokenAndSign);
+        const results = await this.executeRequest("FECAESolicitar", req, token);
 
-        if (returnResponse === true) {
+        if (false) {
             return results;
         } else {
             if (Array.isArray(results.FeDetResp.FECAEDetResponse)) {
                 results.FeDetResp.FECAEDetResponse = results.FeDetResp.FECAEDetResponse[0];
             }
-
             return {
                 CAE: results.FeDetResp.FECAEDetResponse.CAE,
                 CAEFchVto: this.formatDate(results.FeDetResp.FECAEDetResponse.CAEFchVto)

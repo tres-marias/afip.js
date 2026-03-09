@@ -30,9 +30,6 @@ declare class Afip {
      * @param service Service for token authorization
      **/
     CreateServiceTA(service: any): Promise<void>;
-    private TrackUsage;
-    /** @private */
-    private AdminClient;
     /**
      * Create generic Web Service
      *
